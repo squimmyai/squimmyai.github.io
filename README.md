@@ -93,19 +93,19 @@ uv sync
 ### Build and Preview
 
 ```bash
-# Build the site (outputs to dist/)
+# Build the site once (outputs to dist/)
 uv run build.py
 
-# Start local server at http://localhost:8000
+# Start dev server with live reload at http://localhost:8000
 uv run serve.py
 ```
 
-The typical workflow while writing:
+The dev server:
+- Watches `posts/` and `templates/` for changes
+- Automatically rebuilds when files change
+- Injects live reload script into pages (browser refreshes automatically)
 
-1. Edit your markdown in `posts/<slug>/article.md`
-2. Run `uv run build.py` to rebuild
-3. Run `uv run serve.py` and open http://localhost:8000
-4. Refresh the browser to see changes
+Just run `uv run serve.py`, open http://localhost:8000, and edit your markdown — the browser will refresh automatically.
 
 ## Deployment
 
@@ -134,6 +134,7 @@ Managed via uv in `pyproject.toml`:
 - **jinja2** — HTML templating
 - **markdown** — Markdown to HTML conversion
 - **pyyaml** — Frontmatter parsing
+- **watchdog** — File watching for live reload
 
 ## Customization
 

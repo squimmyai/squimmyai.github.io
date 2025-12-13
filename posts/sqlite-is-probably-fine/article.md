@@ -1,12 +1,12 @@
 ---
-title: "SQLite is Probably Fine"
+title: "testSQLite is Probably Fine"
 date: 2024-11-14
 category: Databases
 subtitle: "Your startup doesn't need Postgres. It definitely doesn't need a distributed database."
 excerpt: "Your startup doesn't need Postgres. It definitely doesn't need a distributed database. Let me explain."
 ---
 
-Every few months, I see the same pattern play out. A team spins up a new project. Within the first week, someone's already drafted an {note: RFC}(Request for Comments — a doc proposing technical decisions, borrowed from the IETF tradition.) for the database architecture. It includes words like "sharding," "replication," and "eventual consistency."
+blah blah balhEvery few months, I see the same pattern play out. A team spins up a new project. Within the first week, someone's already drafted an {note: RFC}(Request for Comments — a doc proposing technical decisions, borrowed from the IETF tradition.) for the database architecture. It includes words like "sharding," "replication," and "eventual consistency."
 
 The project? A todo app with maybe three users.
 
