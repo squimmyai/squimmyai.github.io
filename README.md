@@ -51,15 +51,31 @@ Your markdown content here...
 | `subtitle` | No | Italicized text below the title on the post page |
 | `excerpt` | Yes | Summary shown on the homepage |
 
-### Note Tooltips
+### Custom Syntax
 
-You can add inline tooltips using this syntax:
+#### Post Links
+
+Link to other posts using wiki-style syntax:
+
+```
+Read more in [[sqlite-is-probably-fine]].
+Or with custom text: [[sqlite-is-probably-fine|my previous post]].
+```
+
+- `[[slug]]` — renders as a link with the post's title
+- `[[slug|custom text]]` — renders as a link with custom text
+
+The build will warn if you link to a non-existent slug.
+
+#### Note Tooltips
+
+Add inline tooltips that appear on hover:
 
 ```
 This is an {note: RFC}(Request for Comments — a document proposing technical decisions.) for review.
 ```
 
-This renders as underlined text that shows a tooltip on hover.
+This renders as dashed-underlined text that shows a tooltip on hover.
 
 ## Local Development
 

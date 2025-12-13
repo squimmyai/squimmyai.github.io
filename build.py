@@ -54,6 +54,30 @@ def process_notes(html: str) -> str:
     return re.sub(pattern, replace_note, html)
 
 
+def process_post_links(html: str, posts_by_slug: dict) -> str:
+    """
+    Convert post link syntax to HTML links.
+
+    Syntax: [[slug]] or [[slug|custom text]]
+    Output: <a href="/slug/">Post Title</a> or <a href="/slug/">custom text</a>
+    """
+    pattern = r'\[\[([^\]|]+)(?:\|([^\]]+))?\]\]'
+
+    def replace_link(match):
+        slug = match.group(1).strip()
+        custom_text = match.group(2)
+
+        if slug not in posts_by_slug:
+            print(f"Warning: Post link to unknown slug '{slug}'")
+            return match.group(0)  # Return original text
+
+        post = posts_by_slug[slug]
+        link_text = custom_text.strip() if custom_text else post["title"]
+        return f'<a href="/{slug}/">{link_text}</a>'
+
+    return re.sub(pattern, replace_link, html)
+
+
 def render_markdown(content: str) -> str:
     """Convert markdown to HTML with extensions."""
     md = markdown.Markdown(extensions=["fenced_code", "tables"])
@@ -103,11 +127,22 @@ def load_posts() -> list[dict]:
             "category": frontmatter.get("category"),
             "subtitle": frontmatter.get("subtitle"),
             "excerpt": frontmatter.get("excerpt", ""),
-            "content_html": render_markdown(body),
+            "content_raw": body,  # Store raw markdown for second pass
         })
 
     # Sort by date, newest first
     posts.sort(key=lambda p: p["date"], reverse=True)
+
+    # Build slug lookup for post linking
+    posts_by_slug = {p["slug"]: p for p in posts}
+
+    # Second pass: render markdown with post links
+    for post in posts:
+        html = render_markdown(post["content_raw"])
+        html = process_post_links(html, posts_by_slug)
+        post["content_html"] = html
+        del post["content_raw"]
+
     return posts
 
 
