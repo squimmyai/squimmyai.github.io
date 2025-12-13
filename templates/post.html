@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ post.title }} — nullpointer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #e8dcc8;
+      --text: #3d3428;
+      --muted: #8a7a62;
+      --accent: #6b5234;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Serif 4', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    a:hover {
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .logo {
+      font-size: 1rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .back {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .back:hover {
+      color: var(--text);
+    }
+
+    /* Article Header */
+    .post-header {
+      margin-bottom: 3rem;
+    }
+
+    .post-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .post-category {
+      font-family: 'JetBrains Mono', monospace;
+      display: inline-block;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.6rem;
+      background: #d4c4ac;
+      color: var(--accent);
+      border-radius: 3px;
+    }
+
+    .post-header h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .post-subtitle {
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* Article Content */
+    .post-content p {
+      margin-bottom: 1.5rem;
+    }
+
+    .post-content h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .post-content blockquote {
+      border-left: 2px solid var(--accent);
+      padding-left: 1.5rem;
+      margin: 2rem 0;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .post-content code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85em;
+      background: #d4c4ac;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+    }
+
+    .post-content pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      background: #3d3428;
+      color: #e8dcc8;
+      padding: 1.5rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin: 2rem 0;
+      line-height: 1.6;
+    }
+
+    .post-content pre code {
+      background: none;
+      padding: 0;
+    }
+
+    .post-content ul, .post-content ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .post-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    .post-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #d4c4ac;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* Contextual tooltips */
+    .note {
+      text-decoration: underline;
+      text-decoration-style: dashed;
+      text-decoration-color: var(--muted);
+      text-underline-offset: 3px;
+      cursor: help;
+      position: relative;
+    }
+
+    .note .note-content {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--text);
+      color: var(--bg);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-style: normal;
+      line-height: 1.5;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      width: max-content;
+      max-width: 280px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+      z-index: 10;
+    }
+
+    .note .note-content::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--text);
+    }
+
+    .note:hover .note-content {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="/" class="logo">nullpointer</a>
+      <a href="/" class="back">&larr; All posts</a>
+    </header>
+
+    <article>
+      <div class="post-header">
+        <div class="post-meta">
+          <time>{{ post.date_formatted }}</time>
+          {% if post.category %}<span class="post-category">{{ post.category }}</span>{% endif %}
+        </div>
+        <h1>{{ post.title }}</h1>
+        {% if post.subtitle %}<p class="post-subtitle">{{ post.subtitle }}</p>{% endif %}
+      </div>
+
+      <div class="post-content">
+        {{ post.content_html | safe }}
+      </div>
+
+      <footer class="post-footer">
+        Thanks for reading. Find me on <a href="#">GitHub</a> or <a href="#">Twitter</a>.
+      </footer>
+    </article>
+  </div>
+</body>
+</html>
