@@ -51,6 +51,26 @@ Your markdown content here...
 | `subtitle` | No | Italicized text below the title on the post page |
 | `excerpt` | Yes | Summary shown on the homepage |
 
+### Images
+
+Place images alongside your `article.md`:
+
+```
+posts/
+└── my-post/
+    ├── article.md
+    ├── diagram.png
+    └── screenshot.jpg
+```
+
+Reference them in markdown:
+
+```markdown
+![My diagram](diagram.png)
+```
+
+Any non-markdown files in the post folder are automatically copied to the output.
+
 ### Custom Syntax
 
 #### Post Links

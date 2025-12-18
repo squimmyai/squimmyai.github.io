@@ -178,6 +178,13 @@ def build():
         (post_dir / "index.html").write_text(post_html)
         print(f"Generated {post['slug']}/index.html")
 
+        # Copy any assets (non-markdown files) from the post's source folder
+        source_dir = POSTS_DIR / post["slug"]
+        for asset in source_dir.iterdir():
+            if asset.is_file() and asset.suffix.lower() != ".md":
+                shutil.copy2(asset, post_dir / asset.name)
+                print(f"  Copied {asset.name}")
+
     # Create .nojekyll file
     (OUTPUT_DIR / ".nojekyll").write_text("")
 
