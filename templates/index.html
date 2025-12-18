@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>nullpointer</title>
+  <title>squimmy.ai</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
@@ -35,7 +35,7 @@
     }
 
     .container {
-      max-width: 700px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 4rem 2rem;
     }
@@ -53,15 +53,21 @@
       font-weight: 500;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
 
-    .logo::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
+    .logo-icon {
+      width: 24px;
+      height: 16px;
+    }
+
+    .logo-icon circle {
+      fill: var(--accent);
+    }
+
+    .logo-icon line {
+      stroke: var(--accent);
+      stroke-width: 0.75;
     }
 
     nav {
@@ -169,17 +175,33 @@
 <body>
   <div class="container">
     <header>
-      <div class="logo">nullpointer</div>
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 16">
+          <!-- Input node -->
+          <circle cx="2.5" cy="8" r="2.5"/>
+          <!-- Hidden layer (2 vertical) -->
+          <circle cx="12" cy="3" r="2.5"/>
+          <circle cx="12" cy="13" r="2.5"/>
+          <!-- Output node -->
+          <circle cx="21.5" cy="8" r="2.5"/>
+          <!-- Input to hidden -->
+          <line x1="2.5" y1="8" x2="12" y2="3"/>
+          <line x1="2.5" y1="8" x2="12" y2="13"/>
+          <!-- Hidden to output -->
+          <line x1="12" y1="3" x2="21.5" y2="8"/>
+          <line x1="12" y1="13" x2="21.5" y2="8"/>
+        </svg>
+        Squimmy.ai
+      </div>
       <nav>
-        <a href="#">Archive</a>
-        <a href="#">About</a>
-        <a href="#">RSS</a>
       </nav>
     </header>
 
     <section class="hero">
-      <h1>Thoughts on building things that work</h1>
-      <p>Notes on systems, software, and the occasional mass-refactor.</p>
+      <h1>Sqummy's AI Blog</h1>
+      <p>Software Engineer. Been running a dedicated "AI Engineering" team (in a hedge fund) since 2023.</p>
+      <br />
+      <p>Opinions on AI based on this experience plus a couple research experiments for fun.</p>
     </section>
 
     <section class="posts">

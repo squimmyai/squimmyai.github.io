@@ -41,7 +41,7 @@
     }
 
     .container {
-      max-width: 680px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 4rem 2rem;
     }
@@ -60,17 +60,23 @@
       font-weight: 500;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
       text-decoration: none;
       color: var(--text);
     }
 
-    .logo::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
+    .logo-icon {
+      width: 24px;
+      height: 16px;
+    }
+
+    .logo-icon circle {
+      fill: var(--accent);
+    }
+
+    .logo-icon line {
+      stroke: var(--accent);
+      stroke-width: 0.75;
     }
 
     .back {
@@ -237,7 +243,24 @@
 <body>
   <div class="container">
     <header>
-      <a href="/" class="logo">nullpointer</a>
+      <a href="/" class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 16">
+          <!-- Input node -->
+          <circle cx="2.5" cy="8" r="2.5"/>
+          <!-- Hidden layer (2 vertical) -->
+          <circle cx="12" cy="3" r="2.5"/>
+          <circle cx="12" cy="13" r="2.5"/>
+          <!-- Output node -->
+          <circle cx="21.5" cy="8" r="2.5"/>
+          <!-- Input to hidden -->
+          <line x1="2.5" y1="8" x2="12" y2="3"/>
+          <line x1="2.5" y1="8" x2="12" y2="13"/>
+          <!-- Hidden to output -->
+          <line x1="12" y1="3" x2="21.5" y2="8"/>
+          <line x1="12" y1="13" x2="21.5" y2="8"/>
+        </svg>
+        Squimmy.ai
+      </a>
       <a href="/" class="back">&larr; All posts</a>
     </header>
 
