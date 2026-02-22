@@ -84,6 +84,9 @@
     /* Hero */
     .hero {
       margin-bottom: 5rem;
+      background: #ddd0b8;
+      padding: 1.5rem 1.75rem;
+      border-radius: 2px;
     }
 
     .hero h1 {
@@ -92,6 +95,13 @@
       font-weight: 400;
       line-height: 1.3;
       margin-bottom: 1rem;
+    }
+
+    .hero h2 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
     }
 
     .hero p {
@@ -198,10 +208,10 @@
     </header>
 
     <section class="hero">
-      <h1>Sqummy's AI Blog</h1>
-      <p>Software Engineer. Been running a dedicated "AI Engineering" team (in a hedge fund) since 2023.</p>
+      <h2>👋 About me</h2>
+      <p>I've been running an AI Engineering team since 2023 (so slightly before it was officially called that). </p>
       <br />
-      <p>Opinions on AI based on this experience plus a couple research experiments for fun.</p>
+      <p>This houses my thoughts on AI as an industry, AGI, applied AI and even a few experiements with model training.</p>
     </section>
 
     <section class="posts">
@@ -209,9 +219,8 @@
       <article class="post">
         <a href="/{{ post.slug }}/">
           <time class="post-date">{{ post.date_formatted }}</time>
-          {% if post.category %}<span class="post-category">{{ post.category }}</span>{% endif %}
+
           <h2>{{ post.title }}</h2>
-          <p>{{ post.excerpt }}</p>
         </a>
       </article>
       {% endfor %}
