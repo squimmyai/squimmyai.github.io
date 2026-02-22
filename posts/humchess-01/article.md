@@ -1,5 +1,5 @@
 ---
-title: "Building HumChess - A Transformer based Human-like Chess Opponent"
+title: "Training a Transformer to improve my Chess"
 date: 2025-12-23
 category: research
 subtitle: ""
